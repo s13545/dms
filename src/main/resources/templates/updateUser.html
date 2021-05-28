@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改员工信息</title>
+    <link rel="stylesheet" th:href="@{../static/css/navStyle.css}">
+    <link rel="stylesheet" href="../static/css/navStyle.css">
+    <link rel="stylesheet" th:href="@{../static/css/user.css}">
+    <link rel="stylesheet" href="../static/css/user.css">
+</head>
+<body>
+
+<!--导航条-->
+<div>
+    <nav>
+        <h1 class="title">文档管理系统</h1>
+        <ul>
+            <li id="text1">人员管理<b></b></li>
+            <li id="text2">文档管理<b></b></li>
+            <li id="text3">文档检索<b></b></li>
+
+            <ul id="list1">
+                <li class="content1"><a th:href="@{/toUser}">个人信息</a></li>
+                <li class="content1"><a th:href="@{/user/showAll}">全体员工信息</a></li>
+            </ul>
+            <ul id="list2">
+                <li class="content2"><a th:href="@{/file/toMyFile}">我的文档</a></li>
+                <li class="content2"><a th:href="@{/file/showAll}">所有文档</a></li>
+            </ul>
+            <ul id="list3">
+                <li class="content3"><a th:href="@{/file/toFindFile}">搜索文档</a></li>
+                <li class="content3"><a th:href="@{/file/toDepartmentFile}">部门文档</a></li>
+            </ul>
+        </ul>
+
+        <div class="right">欢迎 <span th:if="${session.user!=null}" th:text="${session.user.username}"></span></div>
+    </nav>
+
+</div>
+
+<div class="login-form">
+    <h1>个人信息</h1>
+    <form th:action="@{/user/updateByAdmin}" method="post">
+        <div class="form-input">
+            ID：<input type="text" name="uid" th:value="${session.updateUser.uid}" readonly="readonly">
+        </div>
+        <div class="form-input">
+            用户名：<input type="text" name="username" th:value="${session.updateUser.username}" readonly="readonly">
+        </div>
+        <div class="form-input">
+            密码：<input type="password" name="password" th:value="${session.updateUser.password}">
+        </div>
+        <div class="form-input">
+            真实姓名<input type="text" name="realName" th:value="${session.updateUser.realName}">
+        </div>
+        <div class="form-input">
+            电话号：<input type="text" name="phone" th:value="${session.updateUser.phone}">
+        </div>
+        <div class="form-input">
+            所属部门：<input type="text" name="department" th:value="${session.updateUser.department}">
+        </div>
+        <div class="form-input">
+            <button type="submit">修改</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

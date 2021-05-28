@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>部门文档</title>
+
+    <link rel="stylesheet" th:href="@{../static/css/navStyle.css}">
+    <link rel="stylesheet" href="../static/css/navStyle.css">
+
+    <style>
+        body{
+            text-align: center;
+            background-color: #E1E1E1;
+        }
+        .right{
+            color: white;
+            font-family: STKaiti
+        }
+
+        .table-h1{
+            margin-top: 20px;
+            font-size: 40px;
+            text-align: center;
+            letter-spacing: 15px;
+            color: gray;
+            font-family: STKaiti
+        }
+        .table-h3{
+            margin-top: 350px;
+        }
+        table{
+            margin: auto;
+            height: 50px;
+            border-collapse: collapse;
+        }
+        table,th{
+            border: 3px solid rgb(221, 219, 219);
+        }
+        thead{
+            background-color: #e6e6fa;
+        }
+        tbody{
+            background-color: #ffffff;
+        }
+        .tableCenter{
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--导航条-->
+<div>
+    <nav>
+        <h1 class="title">文档管理系统</h1>
+        <ul>
+            <li id="text1">人员管理<b></b></li>
+            <li id="text2">文档管理<b></b></li>
+            <li id="text3">文档检索<b></b></li>
+
+            <ul id="list1">
+                <li class="content1"><a th:href="@{/toUser}">个人信息</a></li>
+                <li class="content1"><a th:href="@{/user/showAll}">全体员工信息</a></li>
+            </ul>
+            <ul id="list2">
+                <li class="content2"><a th:href="@{/file/toMyFile}">我的文档</a></li>
+                <li class="content2"><a th:href="@{/file/showAll}">所有文档</a></li>
+            </ul>
+            <ul id="list3">
+                <li class="content3"><a th:href="@{/file/toFindFile}">搜索文档</a></li>
+                <li class="content3"><a th:href="@{/file/toDepartmentFile}">部门文档</a></li>
+            </ul>
+        </ul>
+
+        <div class="right">欢迎 <span th:if="${session.user!=null}" th:text="${session.user.username}"></span></div>
+    </nav>
+
+</div>
+
+<div class="table-box">
+    <h1 class="table-h1">文件列表</h1>
+
+    <div class="tableCenter">
+        <table >
+            <thead>
+            <tr>
+                <th>文件ID</th>
+                <th>文件名称</th>
+                <th>文件后缀</th>
+                <th>存储路径</th>
+                <th>文件大小</th>
+                <th>类型</th>
+                <th>所属部门</th>
+                <th>上传时间</th>
+                <th>上传人员</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file,fileStat:${departmentFiles}">
+                <th><span th:text="${file.fid}"></span></th>
+                <th><span th:text="${file.fileName}"></span></th>
+                <th><span th:text="${file.ext}"></span></th>
+                <th><span th:text="${file.path}"></span></th>
+                <th><span th:text="${file.size}"></span></th>
+                <th><span th:text="${file.type}"></span></th>
+                <th><span th:text="${file.department}"></span></th>
+                <th><span th:text="${file.uploadTime}"></span></th>
+                <th><span th:text="${file.uploadPeople}"></span></th>
+                <th>
+                    <!--            下载需要传参数，这里直接传文件编号-->
+                    <a th:href="@{/file/download(fid=${file.fid})}">下载</a>
+                    <a th:href="@{/file/open(fid=${file.fid})}">在线打开</a>
+                    <a th:href="@{/file/delete(fid=${file.fid})}">删除</a>
+                </th>
+            </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div>
+
+
+
+
+<h3 class="table-h3">上传文件</h3>
+<form th:action="@{/file/upload}" method="post" enctype="multipart/form-data">
+    <!--    multipart/form-data是将文件以二进制的形式上传-->
+    <input type="file" name="uploadFile"> <input type="submit" value="上传文件">
+</form>
+
+
+</body>
+</html>

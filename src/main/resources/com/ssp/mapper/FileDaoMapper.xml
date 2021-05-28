@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssp.dao.FileDao">
+
+    <!--    查询所有-->
+    <select id="findAll" resultType="File">
+        select * from files
+    </select>
+
+    <insert id="save" parameterType="File">
+        insert into files (fid,fileName,ext,path,size,type,uploadTime,department,uploadPeople)
+        values (#{fid},#{fileName},#{ext},#{path},#{size},#{type},#{uploadTime},#{department},#{uploadPeople})
+    </insert>
+
+    <select id="findByFId" parameterType="String" resultType="File">
+        select * from files where fid = #{fid}
+    </select>
+
+    <delete id="delete" parameterType="String">
+        delete from files where fid = #{fid}
+    </delete>
+
+    <select id="findByUId" parameterType="String" resultType="File">
+        select * from files where uploadPeople = #{uid}
+    </select>
+
+    <select id="findByDepartment" parameterType="String" resultType="File">
+        select * from files where department = #{department}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="File">
+        select * from files where fileName like concat("%",#{fileName},"%")
+    </select>
+
+</mapper>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>文档管理系统</title>
+    <link rel="stylesheet" th:href="@{../static/css/navStyle.css}">
+    <link rel="stylesheet" href="../static/css/navStyle.css">
+
+</head>
+<body>
+
+<!--导航条-->
+<div>
+    <nav>
+        <h1 class="title">文档管理系统</h1>
+        <ul>
+            <li id="text1">人员管理<b></b></li>
+            <li id="text2">文档管理<b></b></li>
+            <li id="text3">文档检索<b></b></li>
+
+            <ul id="list1">
+                <li class="content1"><a th:href="@{/toUser}">个人信息</a></li>
+                <li class="content1"><a th:href="@{/user/showAll}">全体员工信息</a></li>
+            </ul>
+            <ul id="list2">
+                <li class="content2"><a th:href="@{/file/toMyFile}">我的文档</a></li>
+                <li class="content2"><a th:href="@{/file/showAll}">所有文档</a></li>
+            </ul>
+            <ul id="list3">
+                <li class="content3"><a th:href="@{/file/toFindFile}">搜索文档</a></li>
+                <li class="content3"><a th:href="@{/file/toDepartmentFile}">部门文档</a></li>
+            </ul>
+        </ul>
+
+        <div class="right">欢迎 <span th:if="${session.user!=null}" th:text="${session.user.username}"></span></div>
+    </nav>
+
+</div>
+
+<!--中间插张图片-->
+<div class="picture">
+    <img src="../static/images/welcome.jpg" alt="欢迎访问文档管理系统" style="width: 100%;z-index:-2;position: relative;">
+</div>
+</body>
+</html>

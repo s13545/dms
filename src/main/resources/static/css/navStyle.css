@@ -1,0 +1,79 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration:none;
+}
+body{
+    background: #818181;
+}
+nav{
+    width: 100%;
+    height: 60px;
+    background: #3C8DBC;
+
+}
+.title,#text1,#text2,#text3{
+    line-height: 60px;
+    float: left;
+    display: inline-block;
+    color: darkblue;
+    width: 120px;
+    text-align: center;
+}
+.title{
+    color: white;
+    width: 180px;
+    text-transform: uppercase;
+}
+#list1,#list2,#list3{
+    list-style: none;
+    background: white;
+    text-align: center;
+    width: 120px;
+    line-height: 60px;
+    border-radius: 5px;
+    position:absolute;
+    z-index:1;
+    left: 185px;
+    top: -120px;
+}
+#list1{
+    left:175px;
+}
+#list2{
+    left:295px
+}
+#list3{
+    left: 415px;
+}
+#text1:hover,#text2:hover,#text3:hover{
+    color: white;
+    cursor: pointer;
+}
+#text1:hover ~ #list1,#text2:hover ~ #list2,#text3:hover ~ #list3{
+    top:60px;
+    transform-duration: 0.5s;
+}
+#list1:hover,#list2:hover,#list3:hover{
+    top: 60px;
+    cursor: pointer;
+}
+.content1:hover,.content2:hover,.content3:hover{
+    background: #747474;
+    border-radius: 5px;
+    cursor: pointer;
+}
+b{
+    border-style: solid;
+    border-width: 5px;
+    border-color: white transparent transparent transparent;
+    position: relative;
+    top:13px;
+    left: 2px;
+}
+.right{
+    float: right;
+    line-height: 60px;
+}

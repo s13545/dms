@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+
+    <link rel="stylesheet" th:href="@{../static/css/navStyle.css}">
+    <link rel="stylesheet" href="../static/css/navStyle.css">
+
+    <style>
+        body{
+            text-align: center;
+            background-color: #E1E1E1;
+        }
+        table{
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<!--导航条-->
+<div>
+    <nav>
+        <h1 class="title">文档管理系统</h1>
+        <ul>
+            <li id="text1">人员管理<b></b></li>
+            <li id="text2">文档管理<b></b></li>
+            <li id="text3">文档检索<b></b></li>
+
+            <ul id="list1">
+                <li class="content1"><a th:href="@{/toUser}">个人信息</a></li>
+                <li class="content1"><a th:href="@{/user/showAll}">全体员工信息</a></li>
+            </ul>
+            <ul id="list2">
+                <li class="content2"><a th:href="@{/file/toMyFile}">我的文档</a></li>
+                <li class="content2"><a th:href="@{/file/showAll}">所有文档</a></li>
+            </ul>
+            <ul id="list3">
+                <li class="content3"><a th:href="@{/file/toFindFile}">搜索文档</a></li>
+                <li class="content3"><a th:href="@{/file/toDepartmentFile}">部门文档</a></li>
+            </ul>
+        </ul>
+
+        <div class="right">欢迎 <span th:if="${session.user!=null}" th:text="${session.user.username}"></span></div>
+    </nav>
+
+</div>
+
+<h3>用户列表</h3>
+<table border="1px">
+    <tr>
+        <th>用户ID</th>
+        <th>用户名</th>
+        <th>真实姓名</th>
+        <th>电话号</th>
+        <th>所属部门</th>
+        <th>拥有权限</th>
+        <th>操作</th>
+    </tr>
+
+    <tr th:each="thisUser:${users}">
+        <th><span th:text="${thisUser.uid}"></span></th>
+        <th><span th:text="${thisUser.username}"></span></th>
+        <th><span th:text="${thisUser.realName}"></span></th>
+        <th><span th:text="${thisUser.phone}"></span></th>
+        <th><span th:text="${thisUser.department}"></span></th>
+        <th><span th:text="${thisUser.perm}"></span></th>
+        <th>
+
+            <a th:href="@{/user/toUpdateUser(username=${thisUser.username})}">修改用户信息</a>
+            <a th:href="@{/user/delete(uid=${thisUser.uid})}">注销用户账号</a>
+        </th>
+    </tr>
+</table>
+
+<hr>
+<a th:href="@{/user/toRegister}">新增员工</a>
+
+</body>
+</html>
